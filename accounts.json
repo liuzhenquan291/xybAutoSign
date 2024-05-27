@@ -2,16 +2,16 @@
     {
         "openid": "",
         "unionid": "",
-        "username": "",
-        "password": "",
+        "username": "17853628770",
+        "password": "Qxx04139715",
         "location": {
-            "province": "",
-            "country": "",
-            "city": "",
-            "adcode": 0,
-            "address": "",
-            "lat": 0,
-            "lng": 0
+            "province": "山东省",
+            "country": "东昌府区",
+            "city": "聊城市",
+            "adcode": 371502,
+            "address": "凤凰工业园乔刘村100号健安大药房",
+            "lat": 36.389077,
+            "lng": 116.006322
         }
     }
 ]

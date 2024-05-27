@@ -4,6 +4,7 @@ import time
 import random
 import hashlib
 import logging
+import datetime
 from typing import Tuple, List
 from collections import Counter
 from urllib.parse import quote
@@ -31,6 +32,9 @@ class XybAccount:
         self.open_id = config.get("openid")
         self.union_id = config.get("unionid")
         self.location = config.get("location")
+
+        # self.latlngs = config.get('latlngs')
+
         self.account = config.get("username")
         self.account_pass = config.get("password")
         self.session_id = ""
@@ -288,6 +292,16 @@ class XybAccount:
             'imgUrl': '',
             'reason': ""
         }
+        # 'traineeId': trainId,
+        # 'adcode': userInfo['location']['adcode'],
+        # 'lat': lat,
+        # 'lng': lng,
+        # 'address': userInfo['location']['address'],
+        # 'deviceName': 'microsoft',
+        # 'punchInStatus': '1',
+        # 'clockStatus': '2',
+        # 'imgUrl': '',
+        # 'reason': userInfo['reason']
 
     def auto_sign(self, status: int):
         """
@@ -406,6 +420,7 @@ class XybSign:
 
     HEADERS = {
         "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat",
+        # "User-Agent": "Mozilla/5.0 (Linux; Android 13; 22081212C Build/TKQ1.220829.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160043 MMWEBSDK/20231105 MMWEBID/4478 MicroMessenger/8.0.44.2502(0x28002C51) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android",
         "content-type": "application/x-www-form-urlencoded",
         "Accept-Encoding": "gzip, deflate"
     }
@@ -506,5 +521,86 @@ class XybSign:
 
 
 if __name__ == '__main__':
+    hour = datetime.datetime.now().hour
+
     xyb = XybSign()
-    xyb.sign_in_all()
+    sleep_seconds = random.randint(1, 100)  # 模拟随机打卡
+    time.sleep(sleep_seconds)
+    if hour < 12:
+        xyb.sign_in_all()
+    else:
+        xyb.sign_out_all()
+
+# "username": "18575546060",
+# "password": "m12131415",
+# "username": "17853628770",
+# "password": "Qxx04139715",
+'''
+{
+    'code': '200', 
+    'data': {
+        'questionCount': 0, 'specialty': '药品生物技术', 
+        'education': '大专', 'followCount': 1, 'careerTalkCount': 0, 
+        'sexType': 0, 'faculty': '现代农业与环境学院', 
+        'picUrl': '', 'movementCount': 0, 'answerCount': 0, 
+        'school': '潍坊理工学院', 'klass': '药品专2202', 
+        'jobHuntEditTime': 1715225423000, 
+        'schoolId': 13812, 'graduationYear': 2025, 
+        'findProfessionId': None, 'hasResumeFile': False, 
+        'introductionCount': 0, 'closeTip': False, 'schoolyear': '2022', 
+        'answerSheetCount': 0, 'headPic': '', 
+        'mbtitest': False, 'closeQuestionnaire': False, 
+        'loginer': '刘雨凡', 'fanCount': 1, 
+        'activate': True, 'yearIndex': 2, 
+        'isTeacher': False, 'completenessSum': 37
+    },
+    'msg': '操作成功',
+}
+
+{
+    'code': '200', 
+    'data': {
+        'clockType': 'cantClock', 
+        'unStartClockVo': {
+            'dateName': None, 'endDate': '2024.10.08', 'moduleName': '自主安排',
+            'planName': '2022级药品生物技术2班毕业实习',
+            'projectName': '自主安排',
+            'startDate': '2024.05.15',
+            'traineeId': 82765788
+        }
+    },
+    'msg': '操作成功',
+}
+'''
+# "username": "19561428136",
+# "password": "whd981220",
+'''
+{
+    'code': '200',
+    'data': {
+        'questionCount': 0, 'specialty': '药品生物技术', 
+        'education': '大专', 'followCount': 0, 'careerTalkCount': 0,
+        'sexType': 0, 'faculty': '现代农业与环境学院',
+        'picUrl': '', 'movementCount': 0, 'answerCount': 0,
+        'school': '潍坊理工学院', 'klass': '药品专2202',
+        'jobHuntEditTime': None, 
+        'schoolId': 13812, 'graduationYear': 2025, 
+        'findProfessionId': None, 
+        'hasResumeFile': False, 'introductionCount': 0, 
+        'closeTip': False, 'schoolyear': '2022', 
+        'answerSheetCount': 0, 'headPic': '', 
+        'mbtitest': False, 'closeQuestionnaire': False, 
+        'loginer': '刘淑萍', 'fanCount': 0, 
+        'activate': True, 'yearIndex': 2, 
+        'isTeacher': False, 'completenessSum': 37}, 
+    'msg': '操作成功',
+}
+
+{
+    'code': '200', 
+    'data': {
+        'clockVo': None, 'clockType': 'noPlan'
+    },
+    'msg': '操作成功', 
+}
+'''
